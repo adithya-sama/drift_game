@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Controls
+  - bullets
+  - player_no_collide
+  - minion
+  - pillar
+  - grapple_handle
+  - tomb_stone
+  - teleporter
+  - bullet_launcher
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - player
+  - bullets
+  - enemy_shield
+  - enemy_core
+  - chain_link
+  - minion
+  - blast_minion
+  - key_minion
+  - no_grapple
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: background
+    uniqueID: 3790878129
+    locked: 0
+  - name: player
+    uniqueID: 1974642895
+    locked: 0
+  - name: Enemy
+    uniqueID: 1225100551
+    locked: 0
+  - name: overlay
+    uniqueID: 3843527939
+    locked: 0
+  - name: on-screen-display
+    uniqueID: 197948291
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0

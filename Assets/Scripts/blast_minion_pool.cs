@@ -1,0 +1,1 @@
+﻿public class blast_minion_pool : game_object_pool<blast_minion_handler>{}
