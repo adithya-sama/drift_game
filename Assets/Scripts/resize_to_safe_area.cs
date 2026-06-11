@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class resize_to_safe_area : MonoBehaviour
 {
+
+    public bool enable = true;
+
     void Awake(){
+
+        if(!enable) return;
+
         RectTransform safeAreaTransform = GetComponent<RectTransform>();
         Canvas canvas = GetComponentInParent<Canvas>();
 

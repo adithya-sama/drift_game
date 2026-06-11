@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class grapple_chain_handler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class grapple_chain_handler : MonoBehaviour
     public float shoot_dist, raycast_circle_radius;
     public Vector2 raycast_origin;
     public bool engaged = false;
+    public UnityEvent on_grapple, on_grapple_release;
     Transform chain_tf;
     RaycastHit2D raycast_hit;
     Grapplelable grapplelable_obj;
@@ -19,15 +21,6 @@ public class grapple_chain_handler : MonoBehaviour
         active = grapple_hook_wrapper.activeSelf;
         layer_mask = LayerMask.GetMask("Default");
     }
-    void OnEnable()
-    {
-        mouse_event_watcher.on_mouse_double_click += shoot;
-    }
-    void OnDisable()
-    {
-        mouse_event_watcher.on_mouse_double_click -= shoot;
-        release();
-    }
     public void release()
     {
         grapple_hook_wrapper.SetActive(false);
@@ -36,9 +29,10 @@ public class grapple_chain_handler : MonoBehaviour
         if (grapplelable_obj != null)
         {
             grapplelable_obj.reset();
+            grapplelable_obj = null;
         }
     }
-    void shoot()
+    public void shoot()
     {
         if (active)
         {
@@ -61,6 +55,7 @@ public class grapple_chain_handler : MonoBehaviour
                 grapple_hook_wrapper.SetActive(true);
                 active = true;
                 engaged = true;
+                on_grapple.Invoke();
             }
         }
     }

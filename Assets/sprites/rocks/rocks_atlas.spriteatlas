@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rocks_atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 4
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 7cd05989e2c04104995c0e6ef21a5718, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 17b26813a84af3246bec552ee911506d: 21300000
+    - ee6a8875e128d9f45b6920760feb4376: 21300000
+    - 385c5bd5544d2f84e8ba6d0b24df909d: 21300000
+    - b7adbf976dbe6a34488ef0231978d2ee: 21300000
+    - df82c6185c4d264469e812ed7a0357cf: 21300000
+    - 0713ba69ff937cc409045ff52b2bf8d7: 21300000
+    - 1fbf58ed8be1a35479861e2737e08909: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 17b26813a84af3246bec552ee911506d, type: 3}
+  - {fileID: 21300000, guid: ee6a8875e128d9f45b6920760feb4376, type: 3}
+  - {fileID: 21300000, guid: 385c5bd5544d2f84e8ba6d0b24df909d, type: 3}
+  - {fileID: 21300000, guid: b7adbf976dbe6a34488ef0231978d2ee, type: 3}
+  - {fileID: 21300000, guid: df82c6185c4d264469e812ed7a0357cf, type: 3}
+  - {fileID: 21300000, guid: 0713ba69ff937cc409045ff52b2bf8d7, type: 3}
+  - {fileID: 21300000, guid: 1fbf58ed8be1a35479861e2737e08909, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - rock2
+  - rock5
+  - rock7
+  - rock4
+  - rock6
+  - rock3
+  - rock1
+  m_RenderDataMap: {}
+  m_Tag: rocks_atlas
+  m_IsVariant: 0

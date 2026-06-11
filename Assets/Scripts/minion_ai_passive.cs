@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class minion_ai_passive : MonoBehaviour, Ienemy_with_damage
 {
+    public bool active;
     public Vector2 level_bounds, level_offset;
     public int health, acceleration, target_dist_tolerance, object_avoidance_dist;
     public float circle_cast_radius, min_scale, max_scale;
+    public float take_damage_after_seconds;
+    [SerializeField]
+    public UltEvents.UltEvent on_death;
 
     int current_health, target_dist_tolerance_sqrd;
+    float activated_at;
+    bool can_take_damage = false;
     LayerMask raycast_layer_mask;
     Vector2 vector2_tmp, current_target;
     RaycastHit2D[] ray_results = new RaycastHit2D[1];
@@ -22,19 +28,30 @@ public class minion_ai_passive : MonoBehaviour, Ienemy_with_damage
         current_health = health;
         get_random_point();
     }
+    public void activate(){
+        active = true;
+        activated_at = Time.time;
+    }
     public void Damage(int damage)
     {
+        if(!can_take_damage){
+            return;
+        }
         current_health -= damage;
+        current_health = Mathf.Max(current_health, 0);
         vector2_tmp.x = vector2_tmp.y = min_scale + ((max_scale - min_scale) * ((float)current_health / health));
         transform.localScale = vector2_tmp;
         if (current_health <= 0)
         {
-            level_2_handler.instance.minion_killed();
-            gameObject.SetActive(false);
+            on_death.Invoke();
         }
     }
     void FixedUpdate()
     {
+        if(!active) { return; }
+        if(!can_take_damage && (Time.time - activated_at > take_damage_after_seconds)){
+            can_take_damage = true;
+        }
         if (((Vector2)transform.position - current_target).sqrMagnitude <= target_dist_tolerance_sqrd)
         {
             get_random_point();

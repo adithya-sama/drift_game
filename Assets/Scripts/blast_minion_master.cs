@@ -33,7 +33,6 @@ public class blast_minion_master : MonoBehaviour, Ienemy_with_damage
     {
         current_health -= damage;
         if(current_health <= 0){
-            gameObject.SetActive(false);
             on_killed.Invoke();
             return;
         }

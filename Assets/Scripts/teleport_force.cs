@@ -9,14 +9,14 @@ public class teleport_force : MonoBehaviour
         rigid_body = gameObject.GetComponent<Rigidbody2D>();
     }
     public void store_velocity(){
-        velocity = rigid_body.velocity; 
+        velocity = rigid_body.linearVelocity; 
     }
     void OnDisable(){
         disabled = true;
     }
     void OnEnable(){
         if(disabled){
-            rigid_body.velocity = velocity;
+            rigid_body.linearVelocity = velocity;
         }
         disabled = false;
     }

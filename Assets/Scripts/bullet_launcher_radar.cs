@@ -14,8 +14,9 @@ public class bullet_launcher_radar : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag(enemy_tag))
+        if (collider.CompareTag(enemy_tag)){
             launcher.enemies_in_range[collider.gameObject.GetInstanceID()] = collider.transform;
+        }
     }
     void OnTriggerExit2D(Collider2D collider)
     {

@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Enemy
   - Controls
@@ -51,11 +51,26 @@ TagManager:
   - name: background
     uniqueID: 3790878129
     locked: 0
+  - name: trails
+    uniqueID: 1148279291
+    locked: 0
+  - name: ground_tiles
+    uniqueID: 2132665865
+    locked: 0
   - name: player
     uniqueID: 1974642895
     locked: 0
   - name: Enemy
     uniqueID: 1225100551
+    locked: 0
+  - name: interactable_objects_under_rocks
+    uniqueID: 994696549
+    locked: 0
+  - name: rocks
+    uniqueID: 2067039355
+    locked: 0
+  - name: steering
+    uniqueID: 2589741409
     locked: 0
   - name: overlay
     uniqueID: 3843527939
@@ -66,3 +81,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  m_RenderingLayers:
+  - Default
+  - Light Layer 1
+  - Light Layer 2
+  - Light Layer 3
+  - Light Layer 4
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7

@@ -28,7 +28,7 @@ public class vehicle_teleport_handler : MonoBehaviour
     void FixedUpdate(){
         if(chasis.activeSelf){
             update_teleport_indicator();
-            teleport_direction = chasis_transform.velocity.normalized;
+            teleport_direction = chasis_transform.linearVelocity.normalized;
             if(teleport_direction.sqrMagnitude == 0)
                 teleport_direction = Vector2.up;
             transform.position = teleport_direction * teleport_distance + chasis_transform.position;

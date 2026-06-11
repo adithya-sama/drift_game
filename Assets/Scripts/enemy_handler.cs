@@ -38,6 +38,8 @@ public class enemy_handler : MonoBehaviour, Ienemy_with_damage
         bullet_collision
     };
     public states state;
+    [SerializeField]
+    public UltEvents.UltEvent on_death;
     void Start()
     {
         current_health = health;
@@ -152,8 +154,7 @@ public class enemy_handler : MonoBehaviour, Ienemy_with_damage
             current_health -= damage;
             if (current_health <= 0)
             {
-                level_3_handler.instance.start_next_sequence(2);
-                gameObject.SetActive(false);
+                on_death.Invoke();
             }
         }
     }

@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class ink_plate_ink_handler : MonoBehaviour
 {
-    public level_1_handler.tomb_color ink_color;
-    float time_watcher = 2;
-    void FixedUpdate(){
-        time_watcher -= Time.fixedDeltaTime;
-        if(time_watcher < 0){
-            on_animation_end();
-            this.enabled = false;
+    public Collider2D player_collider;
+    [SerializeField]
+    public UltEvents.UltEvent on_player_enter;
+
+    void onEnable(){
+        if(gameObject.GetComponent<Collider2D>().IsTouching(player_collider)){
+            on_player_enter.Invoke();
         }
     }
-    void on_animation_end(){
-        level_1_handler.instance.ink_plate_animation_end();
-    }
+
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.CompareTag("Player")){
-            level_1_handler.instance.set_current_ink(ink_color);
+            on_player_enter.Invoke();
         }
     }
 }

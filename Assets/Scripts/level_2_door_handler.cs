@@ -5,10 +5,18 @@ using UnityEngine;
 public class level_2_door_handler : MonoBehaviour, Ipullable
 {
     public Transform key;
-    public float pull_speed, retract_speed, retract_pos, open_pos;
+    public float pull_speed, retract_speed, retract_pos, idle_pos, open_pos;
+    [SerializeField]
+    public UltEvents.UltEvent on_reject, on_open;
     bool reject = true, open_key = false, retract = false;
     Vector2 to_pos;
+    Vector3 open_pos_vector;
     grapple_handle_handler gh_handler = null;
+
+    void Awake(){
+        open_pos_vector = transform.TransformPoint(new Vector3(0, open_pos, 0));
+    }
+
     void FixedUpdate(){
         if(retract){
             key.position = Vector2.MoveTowards(key.position, to_pos, retract_speed * Time.fixedDeltaTime);
@@ -26,18 +34,20 @@ public class level_2_door_handler : MonoBehaviour, Ipullable
     public void pull()
     {
         if(reject){
-            gh_handler.forced_detach();
             gh_handler.become_ungrapplelable();
-            level_2_handler.instance.start_next_sequence(2);
+            gh_handler.is_open();
+            gh_handler.forced_detach();
             reject = false;
             to_pos = transform.TransformPoint(new Vector2(0, retract_pos));
             retract = true;
+            on_reject.Invoke();
         }else{
-            key.position = Vector2.MoveTowards(key.position, (Vector2)key.position + Vector2.down, pull_speed * Time.fixedDeltaTime);
-            if(transform.InverseTransformPoint(key.position).y <= open_pos){
-                level_2_handler.instance.start_next_sequence(7);
-                gh_handler.forced_detach();
+            key.position = Vector2.MoveTowards(key.position, open_pos_vector, pull_speed * Time.fixedDeltaTime);
+            if(key.position == open_pos_vector){
                 gh_handler.become_ungrapplelable();
+                gh_handler.is_open();
+                gh_handler.forced_detach();
+                on_open.Invoke();
             }
         }
     }
@@ -46,7 +56,7 @@ public class level_2_door_handler : MonoBehaviour, Ipullable
         gh_handler = handler;
     }
     public void give_passage(){
-        to_pos = transform.TransformPoint(new Vector2(0, -retract_pos));
+        to_pos = transform.TransformPoint(new Vector2(0, idle_pos));
         open_key = true;
     }
     void Ipullable.grappled(){}

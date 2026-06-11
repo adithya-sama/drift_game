@@ -10,17 +10,16 @@ public class chasis : MonoBehaviour
     public TrailRenderer[] tr;
     public wheel[] wheel_i;
     int reset_flow;
-    steering_handler steering_handler_i;
+    public steering_handler steering_handler_i;
     Rigidbody2D rigid_body;
     void Start(){
         //debug_instanstiate();
-        steering_handler_i = GameObject.Find("steering").GetComponent<steering_handler>();
         rigid_body = gameObject.GetComponent<Rigidbody2D>();
     }
     // Debug stuff
     void reset_rb(Rigidbody2D rb){
         rb.transform.localEulerAngles = Vector2.zero;
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0;
     }
     void reset_pos(Rigidbody2D rb){

@@ -5,6 +5,7 @@ using System;
 
 public class mouse_event_watcher : MonoBehaviour
 {
+    public bool deactivate = false;
     public float max_tap_duration, consequtive_tap_delay;
     public bool touch_controls;
     public static event Action<Vector2, Vector2> on_mouse_drag;
@@ -13,7 +14,7 @@ public class mouse_event_watcher : MonoBehaviour
     public static event Action on_mouse_up;
     Vector2 prev_mouse_position, current_mouse_position;
     float touch_duration = 0, touch_gap_duration = 0, consequtive_tap_count = 0;
-    bool dragged = false, is_camera_on_focus = false;
+    bool dragged = false;
     Touch current_touch;
     Vector2 get_mouse_pos()
     {
@@ -21,7 +22,7 @@ public class mouse_event_watcher : MonoBehaviour
     }
     void Update()
     {
-        if(is_camera_on_focus){
+        if(deactivate){
             return;
         }
         if (touch_controls)
@@ -127,9 +128,9 @@ public class mouse_event_watcher : MonoBehaviour
     }
     public void stop_events(){
         ended();
-        is_camera_on_focus = true;
+        deactivate = true;
     }
     public void start_events(){
-        is_camera_on_focus = false;
+        deactivate = false;
     }
 }

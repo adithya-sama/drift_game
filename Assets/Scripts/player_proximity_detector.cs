@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 public class player_proximity_detector : MonoBehaviour
 {
-    public float circle_radius;
-    public UnityEvent on_enter;
+    [SerializeField]
+    public UltEvents.UltEvent on_enter;
     public bool deactive_after_detection;
-    void Start()
-    {
-        gameObject.GetComponent<CircleCollider2D>().radius = circle_radius;
-    }
+
+    bool active = true;
     void OnTriggerEnter2D(Collider2D collider){
+        if(!active) return;
         if(collider.CompareTag("Player")){
             on_enter.Invoke();
             if(deactive_after_detection){
-                gameObject.SetActive(false);
+                active = false;
             }
         }
     }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+
 public static class Utils{
     public static void apply_bounds(ref Vector2 target, Vector2 bounds){
         if(Mathf.Abs(target.x) > bounds.x)
@@ -17,7 +18,8 @@ public static class Utils{
     {
         // The 1 here is a layer mask. which is a bitmap. so 1 means 000001 in binary and 1 is in 0th position. we are only selecting layer 0.
         // if we want only layer 9 then we would use ...01000000000 which in decimal is 512.
-        if (Physics2D.CircleCastNonAlloc(origin.position, circle_cast_radius, target_position - (Vector2)origin.position, ray_results, 30, raycast_layer_mask) > 0)
+        ray_results = Physics2D.CircleCastAll(origin.position, circle_cast_radius, target_position - (Vector2)origin.position, 30, raycast_layer_mask);
+        if (ray_results.Length > 0)
         {
             // getting the direction from current object to object which is hit.
             target_position = (ray_results[0].transform.position - origin.position).normalized;
@@ -129,7 +131,7 @@ public static class Utils{
             if(dist < min_dist){
                 min_dist = dist;
                 min_index = i;
-            } 
+            }
         }
         if(min_index == -1)
             return null;

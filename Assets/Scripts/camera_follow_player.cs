@@ -6,13 +6,12 @@ public class camera_follow_player : MonoBehaviour
     public float ahead_distance_percentage, grappled_ahead_dist, follow_speed, max_follow_speed, grappled_follow_speed, padding, min_focus_time, ahead_distance;
     public Vector2 level_bounds;
     public GameObject player;
-    public UnityEventInt focus_done;
+    public UnityEvent focus_done;
     Transform player_transform;
     grapple_chain_handler player_chain_handler;
     Rigidbody2D player_rigid_body;
     Vector2 prev_player_up, vector2_tmp, focus_pos;
     float float_tmp, max_distance, distance_to_player, current_ahead_dist, current_follow_speed, current_focus_dist, focus_speed;
-    int focus_id;
     bool focus, idle = false;
     void Awake(){
         player_transform = player.transform;
@@ -32,14 +31,15 @@ public class camera_follow_player : MonoBehaviour
         {
             if ((Vector2)transform.position != focus_pos)
             {
-                float_tmp = Mathf.Max((current_focus_dist / focus_speed) * Time.fixedDeltaTime, 0.1f);
+                float_tmp = Mathf.Max(Mathf.Abs(current_focus_dist / focus_speed) * Time.fixedDeltaTime, 0.1f);
                 transform.position = Vector3.MoveTowards(transform.position, focus_pos, float_tmp);
                 current_focus_dist -= float_tmp;
             }
             else
             {
                 idle = true;
-                focus_done.Invoke(focus_id);
+                Debug.Log("focus done");
+                focus_done.Invoke();
             }
         }
         else
@@ -73,9 +73,11 @@ public class camera_follow_player : MonoBehaviour
             prev_player_up = player_transform.up;
         }
     }
-    public void focus_on(Vector2 position, int f_id, float speed = 2)
+    public void focus_on(GameObject point_to, Vector2 position, float speed = 2)
     {
-        focus_id = f_id;
+        if(point_to){
+            position = point_to.transform.position;
+        }
         idle = false;
         focus = true;
         focus_speed = speed;
@@ -86,9 +88,13 @@ public class camera_follow_player : MonoBehaviour
     }
     public void reset_focus()
     {
+        Debug.Log("cam reset");
         focus = false;
         idle = false;
         mouse_event_watcher_instance.start_events();
+    }
+    public void stay_idle(){
+        idle = true;
     }
     // void OnDrawGizmos(){
     //     Gizmos.DrawLine(transform.position, vector2_tmp);
